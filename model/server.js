@@ -9,27 +9,18 @@ class Server {
     constructor(){
         this.app = express();
         this.port =process.env.PORT;
-        this.usuariosPath = '/api/usuarios';
-
-        //conectar a la base de datos
+        this.proyectosPath = '/api/proyectos';
+        this.tecnologiasPath= '/api/tecnologias';
+        this.serviciosPath= '/api/servicios';
         this.conectarDB();
-
-        //Meddlewares
         this.middlewares();
-        //routes  de mi app
         this.routes();
     }
 
     middlewares(){
-        //CORS
         this.app.use( cors() );
-
-        // parseo y lectura
         this.app.use( express.json() );
-
-        //directorio public
         this.app.use( express.static('public') );
-
     }
 
     async conectarDB (){
@@ -37,8 +28,9 @@ class Server {
     }
 
     routes(){
-       this.app.use( this.usuariosPath, require('../routes/usuarios'))
-        
+       this.app.use( this.proyectosPath, require('../routes/proyectos'));
+       this.app.use( this.tecnologiasPath, require('../routes/tecnologias'));
+       this.app.use( this.serviciosPath, require('../routes/servicios'));
     }
 
     listem(){
