@@ -12,6 +12,7 @@ class Server {
         this.proyectosPath = '/api/proyectos';
         this.tecnologiasPath= '/api/tecnologias';
         this.serviciosPath= '/api/servicios';
+        this.emailPath = '/api/mail';
         this.conectarDB();
         this.middlewares();
         this.routes();
@@ -31,6 +32,7 @@ class Server {
        this.app.use( this.proyectosPath, require('../routes/proyectos'));
        this.app.use( this.tecnologiasPath, require('../routes/tecnologias'));
        this.app.use( this.serviciosPath, require('../routes/servicios'));
+       this.app.use( this.emailPath, require('../routes/mailer'));
     }
 
     listem(){

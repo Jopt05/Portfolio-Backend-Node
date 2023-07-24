@@ -26,6 +26,7 @@ const router = new Router();
     router.delete(
         "/:id", [
             check("id", "Id de la tecnología es obligatorio").not().isEmpty(),
+            validarCampos
         ],
         tecnologiasDelete
     );

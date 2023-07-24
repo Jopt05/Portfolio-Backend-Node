@@ -35,6 +35,7 @@ const router = new Router();
     router.delete(
         "/:id", [
             check("id", "Id del servicio es obligatorio").not().isEmpty(),
+            validarCampos
         ],
         serviciosDelete
     );

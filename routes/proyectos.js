@@ -30,6 +30,7 @@ const router = new Router();
             check("project_tecnologies", "El project_tecnologies debe ser array").isArray(),
             check("project_tecnologies.*", "El project_tecnologies debe ser mongoId").isMongoId(),
             check("project_topic", "El project_topic debe estar incluido en " + PROJECT_TOPICS).isIn(PROJECT_TOPICS),
+            validarCampos
         ],
         proyectosPost
     );
@@ -37,6 +38,7 @@ const router = new Router();
     router.delete(
         "/:id", [
             check("id", "Id del proyecto es obligatorio").not().isEmpty(),
+            validarCampos
         ],
         proyectosDelete
     );
