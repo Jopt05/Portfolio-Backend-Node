@@ -46,14 +46,35 @@ async function tecnologiasDelete( req = request, res = response ) {
     );
 
     return res.status(200).json({
-        msg: "Tecnología actualizada correctamente",
+        msg: "Tecnología eliminada correctamente",
         tecnologia
     });
 
 }
 
+async function tecnologiasPut( req = request, res = response ) {
+
+    const {
+        id
+    } = req.params;
+
+    const {
+        tech_name,
+        state
+    } = req.body;
+
+    const tecnologia = await Tecnologia.findByIdAndUpdate(id, { tech_name, state });
+
+    res.status(200).json({
+        id,
+        msg: "Tecnología actualizada correctamente"
+    });
+
+};
+
 module.exports ={
     tecnologiasGet,
     tecnologiasPost,
-    tecnologiasDelete
+    tecnologiasDelete,
+    tecnologiasPut
 }

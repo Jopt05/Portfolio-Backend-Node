@@ -61,8 +61,38 @@ async function serviciosDelete( req = request, res = response ) {
 
 };
 
+async function serviciosPut( req = request, res = response ) {
+
+    const {
+        id
+    } = req.params;
+
+    const {
+        service_name,
+        service_description,
+        service_topic,
+        service_image,
+        service_state
+    } = req.body;
+
+    const servicio = await Servicio.findByIdAndUpdate(id, {
+        service_name,
+        service_description,
+        service_topic,
+        service_image,
+        service_state
+    });
+
+    res.status(200).json({
+        id,
+        msg: "Servicio actualizado correctamente"
+    });
+
+}
+
 module.exports = {
     serviciosGet,
     serviciosPost,
-    serviciosDelete
+    serviciosDelete,
+    serviciosPut
 }

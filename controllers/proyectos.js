@@ -70,8 +70,40 @@ async function proyectosDelete( req = request, res = response ) {
 
 };
 
+async function proyectosPut( req = request, res = response ) {
+
+    const {
+        id
+    } = req.params;
+
+    const {
+        project_name,
+        project_description,
+        project_tecnologies,
+        project_topic,
+        project_state,
+        project_url
+    } = req.body;
+
+    const proyecto = await Proyecto.findByIdAndUpdate(id, {
+        project_name,
+        project_description,
+        project_tecnologies,
+        project_topic,
+        project_state,
+        project_url
+    });
+
+    res.status(200).json({
+        msg: "Proyecto actualizado correctamente",
+        id
+    });
+
+};
+
 module.exports ={
     proyectosGet,
     proyectosPost,
-    proyectosDelete
+    proyectosDelete,
+    proyectosPut
 }

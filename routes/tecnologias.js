@@ -5,7 +5,8 @@ const { validarCampos } = require('../middlewares/validar-campos')
 const {
     tecnologiasGet,
     tecnologiasPost,
-    tecnologiasDelete
+    tecnologiasDelete,
+    tecnologiasPut
 } = require('../controllers/tecnologias');
 
 const router = new Router();
@@ -21,6 +22,17 @@ const router = new Router();
             validarCampos
         ],
         tecnologiasPost
+    );
+
+    router.put(
+        "/:id", [
+            check("id", "Id de la tecnología es obligatorio").not().isEmpty(),
+            check("id", "Id inválido").isMongoId(),
+            check("tech_name", "Tech_name es obligatorio").not().isEmpty(),
+            check("state", "State es obligatorio").not().isEmpty(),
+            validarCampos
+        ],
+        tecnologiasPut
     );
 
     router.delete(

@@ -5,7 +5,8 @@ const { validarCampos } = require('../middlewares/validar-campos')
 const {
     serviciosGet,
     serviciosPost,
-    serviciosDelete
+    serviciosDelete,
+    serviciosPut
 } = require('../controllers/servicios');
 
 const SERVICE_TOPICS = [
@@ -39,5 +40,20 @@ const router = new Router();
         ],
         serviciosDelete
     );
+
+    router.put(
+        "/:id", [
+            check("id", "Id del servicio es obligatorio").not().isEmpty(),
+            check("id", "Id no es válido").isMongoId(),
+            check("service_name", "El campo service_name es obligatorio").not().isEmpty(),
+            check("service_description", "El campo service_description es obligatorio").not().isEmpty(),
+            check("service_topic", "El campo service_topic es obligatorio").not().isEmpty(),
+            check("service_topic", "El service_topic debe estar incluido en " + SERVICE_TOPICS).isIn(SERVICE_TOPICS),
+            check("service_image", "El service_image es obligatorio").not().isEmpty(),
+            check("service_state", "El service_state es obligatorio").not().isEmpty(),
+            validarCampos
+        ],
+        serviciosPut
+    )
 
 module.exports = router;
