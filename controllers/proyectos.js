@@ -5,9 +5,7 @@ const Proyecto = require('../model/proyecto');
 async function proyectosGet( req = request, res = response ) {
 
     const proyectos = await Proyecto
-        .find({
-            project_state: true
-        })
+        .find()
         .populate({
             path: "project_tecnologies",
             select: "tech_name",

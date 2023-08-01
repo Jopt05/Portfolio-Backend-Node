@@ -5,9 +5,7 @@ const Servicio = require("../model/servicio");
 async function serviciosGet( req = request, res = response ) {
 
     const servicios = await Servicio
-        .find({
-            service_state: true
-        });
+        .find();
 
     res.status(200).json({
         services: servicios,
