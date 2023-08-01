@@ -3,7 +3,8 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 const {
-    login
+    login,
+    auth
 } = require('../controllers/usuarios');
 
 const router = new Router();
@@ -15,6 +16,14 @@ router.post(
         validarCampos
     ],
     login
+)
+
+router.post(
+    "/auth", [
+        check("token", "El campo token es obligatorio").not().isEmpty(),
+        validarCampos
+    ],
+    auth
 )
 
 module.exports = router;

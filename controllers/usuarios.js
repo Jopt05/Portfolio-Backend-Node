@@ -2,6 +2,7 @@ const { response, request } = require('express');
 
 const Usuario = require('../model/usuario');
 const generarJWT = require('../helpers/generarJWT');
+const jwt = require('jsonwebtoken');
 
 async function login( req = request, res = response ) {
 
@@ -35,6 +36,31 @@ async function login( req = request, res = response ) {
 
 };
 
+async function auth( req = request, res = response ) {
+
+    const {
+        token
+    } = req.body;
+
+    try {
+
+        const { _id } = jwt.verify( token, process.env.SECRET_JWT );
+
+        res.status(200).json({
+            "msg": "Token validado correctamente",
+            _id
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(401).json({
+            "msg": "Token no válido"
+        });
+    }
+
+};
+
 module.exports = {
-    login
+    login,
+    auth
 }
