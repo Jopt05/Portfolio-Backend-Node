@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { IServicio } from '../@types';
+import { ITecnologia } from '../@types';
 
-const TecnologiaSchema = new Schema<IServicio>({
+const TecnologiaSchema = new Schema<ITecnologia>({
     tech_name: {
         type: String,
         required: [
@@ -15,4 +15,4 @@ const TecnologiaSchema = new Schema<IServicio>({
     }
 });
 
-export const Tecnologia = model<IServicio>('Tecnologia', TecnologiaSchema);
+export const Tecnologia = model<ITecnologia>('Tecnologia', TecnologiaSchema);

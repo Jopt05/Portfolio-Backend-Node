@@ -24,7 +24,7 @@ export async function serviciosPost( req: Request, res: Response ) {
         service_image
     } = req.body;
 
-    const servicio = new Servicio({
+    const servicio: IServicio = new Servicio({
         service_name,
         service_description,
         service_topic,
@@ -46,7 +46,7 @@ export async function serviciosDelete( req: Request, res: Response ) {
         id
     } = req.params;
 
-    const servicio: (IServicio & Document) | null = await Servicio.findByIdAndUpdate(
+    const servicio: IServicio | null = await Servicio.findByIdAndUpdate(
         id, 
         {
             service_state: false
@@ -74,7 +74,7 @@ export async function serviciosPut( req: Request, res: Response ) {
         service_state
     } = req.body;
 
-    const servicio: (IServicio & Document) | null = await Servicio.findByIdAndUpdate(id, {
+    const servicio: IServicio | null = await Servicio.findByIdAndUpdate(id, {
         service_name,
         service_description,
         service_topic,

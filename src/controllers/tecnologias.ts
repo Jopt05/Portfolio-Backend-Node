@@ -1,10 +1,11 @@
 
 import { Request, Response } from 'express';
 import { Tecnologia } from '../model/tecnologia';
+import { ITecnologia } from '../@types';
 
 export async function tecnologiasGet( req: Request, res: Response ) {
 
-    const tecnologias = await Tecnologia.find();
+    const tecnologias: ITecnologia[] = await Tecnologia.find();
 
     res.status(200).json({
         proyectos: tecnologias,
@@ -19,7 +20,7 @@ export async function tecnologiasPost( req: Request, res: Response ) {
         tech_name
     } = req.body;
 
-    const tecnologia = new Tecnologia({
+    const tecnologia: ITecnologia = new Tecnologia({
         tech_name
     });
 
@@ -38,7 +39,7 @@ export async function tecnologiasDelete( req: Request, res: Response ) {
         id
     } = req.params;
 
-    const tecnologia = await Tecnologia.findByIdAndUpdate(
+    const tecnologia: ITecnologia | null = await Tecnologia.findByIdAndUpdate(
         id, 
         {
             state: false
@@ -63,7 +64,7 @@ export async function tecnologiasPut( req: Request, res: Response ) {
         state
     } = req.body;
 
-    const tecnologia = await Tecnologia.findByIdAndUpdate(id, { tech_name, state });
+    const tecnologia: ITecnologia | null = await Tecnologia.findByIdAndUpdate(id, { tech_name, state });
 
     res.status(200).json({
         id,

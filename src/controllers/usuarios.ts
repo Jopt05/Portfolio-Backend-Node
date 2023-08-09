@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import generarJWT from '../helpers/generarJWT';
 import jwt = require('jsonwebtoken');
 import { Usuario } from '../model/usuario';
+import { IUsuario } from '../@types';
 
 interface IToken {
     _id: string;
@@ -14,9 +15,9 @@ export async function login( req: Request, res: Response ) {
         password
     } = req.body;
 
-    const user = await Usuario.findOne({ user_name });
+    const user: IUsuario | null = await Usuario.findOne({ user_name });
 
-    if( !user ) {
+    if( user == null ) {
         return res.status(400).json({
             msg: "Usuario / Password incorrectos"
         });
@@ -49,14 +50,14 @@ export async function auth( req: Request, res: Response ) {
 
         const payload = jwt.verify( token, process.env.SECRET_JWT || "hola" );
 
-        res.status(200).json({
+        return res.status(200).json({
             "msg": "Token validado correctamente",
             _id: (payload as IToken)._id
         })
         
     } catch (error) {
         console.log(error);
-        res.status(401).json({
+        return res.status(401).json({
             "msg": "Token no válido"
         });
     }

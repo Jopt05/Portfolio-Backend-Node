@@ -1,3 +1,5 @@
+import { Document } from "mongoose";
+
 export interface IProyecto extends Document {
     project_name: string;
     project_description: string;

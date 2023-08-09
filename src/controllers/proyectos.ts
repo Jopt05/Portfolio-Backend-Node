@@ -31,7 +31,7 @@ export async function proyectosPost( req: Request, res: Response ) {
         project_url
     } = req.body;
 
-    const proyecto = new Proyecto({
+    const proyecto: IProyecto = new Proyecto({
         project_name,
         project_description,
         project_tecnologies,
@@ -54,7 +54,7 @@ export async function proyectosDelete( req: Request, res: Response ) {
         id
     } = req.params;
 
-    const proyecto = await Proyecto.findByIdAndUpdate(
+    const proyecto: IProyecto | null = await Proyecto.findByIdAndUpdate(
         id, 
         {
             project_state: false
@@ -83,7 +83,7 @@ export async function proyectosPut( req: Request, res: Response ) {
         project_url
     } = req.body;
 
-    await Proyecto.findByIdAndUpdate(id, {
+    const proyecto: IProyecto | null = await Proyecto.findByIdAndUpdate(id, {
         project_name,
         project_description,
         project_tecnologies,
