@@ -1,12 +1,10 @@
-const { Router } = require( 'express');
-const { check } = require('express-validator');
-const { validarCampos } = require('../middlewares/validar-campos');
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { validarCampos } from '../middlewares/validar-campos';
 
-const {
-    mailerPost
-} = require("../controllers/mailer");
+import { mailerPost } from "../controllers/mailer";
 
-const router = new Router();
+const router = Router();
 
     router.post('/',[
         check('name', 'Name must be filled!').not().isEmpty(),
@@ -16,4 +14,4 @@ const router = new Router();
         validarCampos
     ], mailerPost);
 
-module.exports = router;
+export default router;

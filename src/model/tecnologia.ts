@@ -1,6 +1,7 @@
-const { Schema,model} = require('mongoose');
+import { Schema, model } from 'mongoose';
+import { IServicio } from '../@types';
 
-const TecnologiaSchema = Schema({
+const TecnologiaSchema = new Schema<IServicio>({
     tech_name: {
         type: String,
         required: [
@@ -14,4 +15,4 @@ const TecnologiaSchema = Schema({
     }
 });
 
-module.exports = model('Tecnologia', TecnologiaSchema);
+export const Tecnologia = model<IServicio>('Tecnologia', TecnologiaSchema);

@@ -1,10 +1,9 @@
-const { response, request } = require('express');
+import { Request, Response } from "express";
+import { NodeMailer } from "../model/nodemailer";
 
-const NodeMailer = require("../model/nodemailer");
+export async function mailerPost( req: Request, res: Response ) {
 
-async function mailerPost( req = request, res = response ) {
-
-    const mailer = new NodeMailer;
+    const mailer = new NodeMailer();
 
     const {
         name,
@@ -17,18 +16,13 @@ async function mailerPost( req = request, res = response ) {
         message
     );
 
-    if( fueEnviado ) {
-        res.json({
-            ok: true,
-        })
-    } else {
-        res.json({
+    if( !fueEnviado ) {
+        return res.status(200).json({
             ok: false
         })
     }
 
+    return res.status(200).json({
+        ok: true
+    })
 };
-
-module.exports = {
-    mailerPost
-}

@@ -1,6 +1,8 @@
-const nodemailer = require('nodemailer');
+import nodemailer = require('nodemailer');
 
-class NodeMailer {
+export class NodeMailer {
+
+    public transporter: any;
 
     constructor(){
         this.transporter = null,
@@ -19,7 +21,7 @@ class NodeMailer {
         this.transporter = transporter;
     };
 
-    async sendEmail(subject, text) {
+    async sendEmail(subject: string, text: string) {
         const options = {
             from : process.env.EMAIL_MAILER, 
             to: process.env.DESTINY_MAILER, 
@@ -28,7 +30,7 @@ class NodeMailer {
         }
 
         const response = await new Promise((resolve, reject) => {
-            this.transporter.sendMail(options, (error, info) => {
+            this.transporter.sendMail(options, (error: any, info: any) => {
                 if(error) {
                     reject(false);
                 } else {
@@ -41,5 +43,3 @@ class NodeMailer {
     }
 
 }
-
-module.exports = NodeMailer;

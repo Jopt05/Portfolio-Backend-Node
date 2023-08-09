@@ -1,10 +1,10 @@
-const { response, request } = require('express');
+import { Request, Response } from "express";
+import { Proyecto } from "../model/proyecto";
+import { IProyecto } from "../@types";
 
-const Proyecto = require('../model/proyecto');
+export async function proyectosGet( req: Request, res: Response ) {
 
-async function proyectosGet( req = request, res = response ) {
-
-    const proyectos = await Proyecto
+    const proyectos: IProyecto[] = await Proyecto
         .find()
         .populate({
             path: "project_tecnologies",
@@ -21,7 +21,7 @@ async function proyectosGet( req = request, res = response ) {
 
 };
 
-async function proyectosPost( req = request, res = response ) {
+export async function proyectosPost( req: Request, res: Response ) {
 
     const {
         project_name,
@@ -48,7 +48,7 @@ async function proyectosPost( req = request, res = response ) {
 
 };
 
-async function proyectosDelete( req = request, res = response ) {
+export async function proyectosDelete( req: Request, res: Response ) {
 
     const {
         id
@@ -68,7 +68,7 @@ async function proyectosDelete( req = request, res = response ) {
 
 };
 
-async function proyectosPut( req = request, res = response ) {
+export async function proyectosPut( req: Request, res: Response ) {
 
     const {
         id
@@ -83,7 +83,7 @@ async function proyectosPut( req = request, res = response ) {
         project_url
     } = req.body;
 
-    const proyecto = await Proyecto.findByIdAndUpdate(id, {
+    await Proyecto.findByIdAndUpdate(id, {
         project_name,
         project_description,
         project_tecnologies,
@@ -96,12 +96,4 @@ async function proyectosPut( req = request, res = response ) {
         msg: "Proyecto actualizado correctamente",
         id
     });
-
-};
-
-module.exports ={
-    proyectosGet,
-    proyectosPost,
-    proyectosDelete,
-    proyectosPut
 }

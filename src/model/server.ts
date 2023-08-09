@@ -1,14 +1,27 @@
-const express = require('express');
+import { Application } from 'express';
+import cors = require('cors');
+import express = require('express');
+import proyectosRoute from '../routes/proyectos';
+import serviciosRoute from '../routes/servicios';
+import tecnologiasRoute from '../routes/tecnologias';
+import usuariosRoute from '../routes/usuarios';
+import mailerRoute from '../routes/mailer';
 
-const cors = require('cors');
-const { dbConnection } = require('../database/config');
-
+import { dbConnection } from '../database/config';
 
 class Server {
 
+    private app: Application;
+    private port: string;
+    private proyectosPath: string;
+    private tecnologiasPath: string;
+    private serviciosPath: string;
+    private emailPath: string;
+    private usuariosPath: string;
+
     constructor(){
         this.app = express();
-        this.port =process.env.PORT;
+        this.port = process.env.PORT || "8000";
         this.proyectosPath = '/api/proyectos';
         this.tecnologiasPath= '/api/tecnologias';
         this.serviciosPath= '/api/servicios';
@@ -30,11 +43,11 @@ class Server {
     }
 
     routes(){
-       this.app.use( this.proyectosPath, require('../routes/proyectos'));
-       this.app.use( this.tecnologiasPath, require('../routes/tecnologias'));
-       this.app.use( this.serviciosPath, require('../routes/servicios'));
-       this.app.use( this.emailPath, require('../routes/mailer'));
-       this.app.use( this.usuariosPath, require('../routes/usuarios'));
+       this.app.use( this.proyectosPath, proyectosRoute);
+       this.app.use( this.tecnologiasPath, tecnologiasRoute);
+       this.app.use( this.serviciosPath, serviciosRoute);
+       this.app.use( this.emailPath, mailerRoute);
+       this.app.use( this.usuariosPath, usuariosRoute);
     }
 
     listem(){
@@ -44,4 +57,4 @@ class Server {
     }
 }
 
-module.exports = Server;
+export default Server;

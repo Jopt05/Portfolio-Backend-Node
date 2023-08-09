@@ -1,8 +1,8 @@
-const { response, request } = require('express');
 
-const Tecnologia = require('../model/tecnologia');
+import { Request, Response } from 'express';
+import { Tecnologia } from '../model/tecnologia';
 
-async function tecnologiasGet( req = request, res = response ) {
+export async function tecnologiasGet( req: Request, res: Response ) {
 
     const tecnologias = await Tecnologia.find();
 
@@ -13,7 +13,7 @@ async function tecnologiasGet( req = request, res = response ) {
 
 };
 
-async function tecnologiasPost( req = request, res = response ) {
+export async function tecnologiasPost( req: Request, res: Response ) {
 
     const {
         tech_name
@@ -32,7 +32,7 @@ async function tecnologiasPost( req = request, res = response ) {
 
 }
 
-async function tecnologiasDelete( req = request, res = response ) {
+export async function tecnologiasDelete( req: Request, res: Response ) {
 
     const {
         id
@@ -52,7 +52,7 @@ async function tecnologiasDelete( req = request, res = response ) {
 
 }
 
-async function tecnologiasPut( req = request, res = response ) {
+export async function tecnologiasPut( req: Request, res: Response ) {
 
     const {
         id
@@ -71,10 +71,3 @@ async function tecnologiasPut( req = request, res = response ) {
     });
 
 };
-
-module.exports ={
-    tecnologiasGet,
-    tecnologiasPost,
-    tecnologiasDelete,
-    tecnologiasPut
-}

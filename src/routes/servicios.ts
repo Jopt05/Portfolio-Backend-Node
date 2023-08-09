@@ -1,20 +1,15 @@
-const { Router } = require( 'express');
-const { check } = require('express-validator');
-const { validarCampos } = require('../middlewares/validar-campos')
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { validarCampos } from '../middlewares/validar-campos';
 
-const {
-    serviciosGet,
-    serviciosPost,
-    serviciosDelete,
-    serviciosPut
-} = require('../controllers/servicios');
+import { serviciosGet, serviciosPost, serviciosDelete, serviciosPut } from '../controllers/servicios';
 
 const SERVICE_TOPICS = [
     0,
     1
 ]
 
-const router = new Router();
+const router = Router();
 
     router.get(
         "/",
@@ -56,4 +51,4 @@ const router = new Router();
         serviciosPut
     )
 
-module.exports = router;
+export default router;

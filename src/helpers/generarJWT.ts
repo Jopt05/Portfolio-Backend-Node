@@ -7,7 +7,7 @@ function generarJWT(uuid = '') {
 
         jwt.sign( payload, process.env.SECRET_JWT, {
             expiresIn: '4h'
-        }, function( err, token ) {
+        }, function( err: any, token: any ) {
 
             if( err ) {
                 console.log(err);
@@ -21,4 +21,4 @@ function generarJWT(uuid = '') {
 
 }
 
-module.exports = generarJWT;
+export default generarJWT;

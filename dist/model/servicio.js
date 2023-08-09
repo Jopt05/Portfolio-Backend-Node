@@ -1,12 +1,12 @@
-import { Schema, model } from 'mongoose';
-import { IServicio } from '../@types';
-
-const SERVICE_TOPICS: number[] = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Servicio = void 0;
+const mongoose_1 = require("mongoose");
+const SERVICE_TOPICS = [
     0,
     1
-]
-
-const ServicioSchema = new Schema<IServicio>({
+];
+const ServicioSchema = new mongoose_1.Schema({
     service_name: {
         type: String,
         required: [
@@ -22,7 +22,7 @@ const ServicioSchema = new Schema<IServicio>({
         ]
     },
     service_topic: {
-        type: Schema.Types.Number,
+        type: mongoose_1.Schema.Types.Number,
         enum: SERVICE_TOPICS,
         required: [
             true,
@@ -41,5 +41,4 @@ const ServicioSchema = new Schema<IServicio>({
         default: true
     }
 });
-
-export const Servicio = model<IServicio>('Servicio', ServicioSchema);
+exports.Servicio = (0, mongoose_1.model)('Servicio', ServicioSchema);

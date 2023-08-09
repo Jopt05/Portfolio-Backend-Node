@@ -1,10 +1,13 @@
-const { response, request } = require('express');
+import { Request, Response } from 'express';
+import generarJWT from '../helpers/generarJWT';
+import jwt = require('jsonwebtoken');
+import { Usuario } from '../model/usuario';
 
-const Usuario = require('../model/usuario');
-const generarJWT = require('../helpers/generarJWT');
-const jwt = require('jsonwebtoken');
+interface IToken {
+    _id: string;
+}
 
-async function login( req = request, res = response ) {
+export async function login( req: Request, res: Response ) {
 
     const {
         user_name,
@@ -36,7 +39,7 @@ async function login( req = request, res = response ) {
 
 };
 
-async function auth( req = request, res = response ) {
+export async function auth( req: Request, res: Response ) {
 
     const {
         token
@@ -44,11 +47,11 @@ async function auth( req = request, res = response ) {
 
     try {
 
-        const { _id } = jwt.verify( token, process.env.SECRET_JWT );
+        const payload = jwt.verify( token, process.env.SECRET_JWT || "hola" );
 
         res.status(200).json({
             "msg": "Token validado correctamente",
-            _id
+            _id: (payload as IToken)._id
         })
         
     } catch (error) {
@@ -59,8 +62,3 @@ async function auth( req = request, res = response ) {
     }
 
 };
-
-module.exports = {
-    login,
-    auth
-}

@@ -1,10 +1,11 @@
-const { response, request } = require('express');
+import { Request, Response } from 'express';
 
-const Servicio = require("../model/servicio");
+import { IServicio } from '../@types';
+import { Servicio } from '../model/servicio';
 
-async function serviciosGet( req = request, res = response ) {
+export async function serviciosGet( req: Request, res: Response ) {
 
-    const servicios = await Servicio
+    const servicios: IServicio[] = await Servicio
         .find();
 
     res.status(200).json({
@@ -14,7 +15,7 @@ async function serviciosGet( req = request, res = response ) {
 
 };
 
-async function serviciosPost( req = request, res = response ) {
+export async function serviciosPost( req: Request, res: Response ) {
 
     const {
         service_name,
@@ -39,13 +40,13 @@ async function serviciosPost( req = request, res = response ) {
 
 };
 
-async function serviciosDelete( req = request, res = response ) {
+export async function serviciosDelete( req: Request, res: Response ) {
 
     const {
         id
     } = req.params;
 
-    const servicio = await Servicio.findByIdAndUpdate(
+    const servicio: (IServicio & Document) | null = await Servicio.findByIdAndUpdate(
         id, 
         {
             service_state: false
@@ -59,7 +60,7 @@ async function serviciosDelete( req = request, res = response ) {
 
 };
 
-async function serviciosPut( req = request, res = response ) {
+export async function serviciosPut( req: Request, res: Response ) {
 
     const {
         id
@@ -73,7 +74,7 @@ async function serviciosPut( req = request, res = response ) {
         service_state
     } = req.body;
 
-    const servicio = await Servicio.findByIdAndUpdate(id, {
+    const servicio: (IServicio & Document) | null = await Servicio.findByIdAndUpdate(id, {
         service_name,
         service_description,
         service_topic,
@@ -86,11 +87,4 @@ async function serviciosPut( req = request, res = response ) {
         msg: "Servicio actualizado correctamente"
     });
 
-}
-
-module.exports = {
-    serviciosGet,
-    serviciosPost,
-    serviciosDelete,
-    serviciosPut
 }

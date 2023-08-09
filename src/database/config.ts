@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose = require('mongoose');
 
-const dbConnection = async()=>{
+export const dbConnection = async()=>{
 
     try {
         
-        await mongoose.connect(process.env.MONGODB_CNN,{
+        await mongoose.connect(process.env.MONGODB_CNN || "hola",{
             useNewUrlParser:true,
             useUnifiedTopology:true,
             useCreateIndex:true,
@@ -18,8 +18,3 @@ const dbConnection = async()=>{
     }
 
 }
-
-module.exports={
-    dbConnection
-}
-

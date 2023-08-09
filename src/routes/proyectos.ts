@@ -1,13 +1,8 @@
-const { Router } = require( 'express');
-const { check } = require('express-validator');
-const { validarCampos } = require('../middlewares/validar-campos')
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { validarCampos } from '../middlewares/validar-campos';
 
-const {
-    proyectosGet,
-    proyectosPost,
-    proyectosDelete,
-    proyectosPut
-} = require("../controllers/proyectos");
+import { proyectosGet, proyectosPost, proyectosDelete, proyectosPut } from "../controllers/proyectos";
 
 const PROJECT_TOPICS = [
     0,
@@ -16,7 +11,7 @@ const PROJECT_TOPICS = [
     3
 ]
 
-const router = new Router();
+const router = Router();
 
     router.get(
         "/",
@@ -62,4 +57,4 @@ const router = new Router();
         proyectosPut
     )
 
-module.exports = router;
+export default router;

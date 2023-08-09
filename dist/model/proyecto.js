@@ -1,14 +1,14 @@
-import { Schema, model } from 'mongoose';
-import { IProyecto } from '../@types';
-
-const PROJECT_TOPICS: number[] = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Proyecto = void 0;
+const mongoose_1 = require("mongoose");
+const PROJECT_TOPICS = [
     0,
     1,
     2,
     3
-]
-
-const ProyectoSchema = new Schema<IProyecto>({
+];
+const ProyectoSchema = new mongoose_1.Schema({
     project_name: {
         type: String,
         required: [
@@ -24,7 +24,7 @@ const ProyectoSchema = new Schema<IProyecto>({
         ]
     },
     project_tecnologies: {
-        type: [Schema.Types.ObjectId],
+        type: [mongoose_1.Schema.Types.ObjectId],
         ref: 'Tecnologia',
         required: [
             true,
@@ -51,5 +51,4 @@ const ProyectoSchema = new Schema<IProyecto>({
         ]
     }
 });
-
-export const Proyecto =  model<IProyecto>('Proyecto', ProyectoSchema);
+exports.Proyecto = (0, mongoose_1.model)('Proyecto', ProyectoSchema);

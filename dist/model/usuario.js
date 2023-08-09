@@ -1,7 +1,8 @@
-import { Schema, model } from 'mongoose';
-import { IUsuario } from '../@types';
-
-const UsuarioSchema = new Schema<IUsuario>({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Usuario = void 0;
+const mongoose_1 = require("mongoose");
+const UsuarioSchema = new mongoose_1.Schema({
     user_name: {
         type: String,
         required: [
@@ -24,5 +25,4 @@ const UsuarioSchema = new Schema<IUsuario>({
         ]
     }
 });
-
-export const Usuario = model<IUsuario>('Usuario', UsuarioSchema);
+exports.Usuario = (0, mongoose_1.model)('Usuario', UsuarioSchema);

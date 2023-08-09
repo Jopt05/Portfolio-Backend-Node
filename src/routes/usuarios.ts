@@ -1,13 +1,10 @@
-const { Router } = require( 'express');
-const { check } = require('express-validator');
-const { validarCampos } = require('../middlewares/validar-campos');
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { validarCampos } from '../middlewares/validar-campos';
 
-const {
-    login,
-    auth
-} = require('../controllers/usuarios');
+import { login, auth } from '../controllers/usuarios';
 
-const router = new Router();
+const router = Router();
 
 router.post(
     "/login", [
@@ -26,4 +23,4 @@ router.post(
     auth
 )
 
-module.exports = router;
+export default router;
