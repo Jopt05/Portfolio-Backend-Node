@@ -1,30 +1,49 @@
 import nodemailer = require('nodemailer');
 
+interface ICreateTransport {
+    service: string;
+    user: string;
+    pass: string;
+}
+
 export class NodeMailer {
 
-    public transporter: any;
+    public service: string;
+    public user: string;
+    public pass: string;
+    public from: string;
+    public to: string;
+    public transporter: nodemailer.Transporter<nodemailer.SentMessageInfo>;
 
     constructor(){
-        this.transporter = null,
-        this.createTransport();
+        this.service = process.env.SERVICE_MAILER || "",
+        this.user = process.env.USER_MAILER || "",
+        this.pass = process.env.PASS_MAILER || "",
+        this.from = process.env.EMAIL_MAILER || "",
+        this.to = process.env.DESTINY_MAILER || "",
+        this.transporter = this.createTransport({
+            service: this.service,
+            pass: this.pass,
+            user: this.user
+        })
     }
 
-    createTransport(){
+    createTransport(options: ICreateTransport){
         const transporter = nodemailer.createTransport({
-            service: process.env.SERVICE_MAILER,
+            service: options.service,
             auth: {
-                user: process.env.USER_MAILER,
-                pass: process.env.PASS_MAILER
+                user: options.user,
+                pass: options.pass
             },
         });
 
-        this.transporter = transporter;
+        return transporter;
     };
 
     async sendEmail(subject: string, text: string) {
         const options = {
-            from : process.env.EMAIL_MAILER, 
-            to: process.env.DESTINY_MAILER, 
+            from : this.from, 
+            to: this.to, 
             subject: subject, 
             text: text
         }
