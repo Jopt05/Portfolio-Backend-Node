@@ -51,6 +51,7 @@ export class NodeMailer {
         const response = await new Promise((resolve, reject) => {
             this.transporter.sendMail(options, (error: any, info: any) => {
                 if(error) {
+                    console.log(error);
                     reject(false);
                 } else {
                     resolve(true);
