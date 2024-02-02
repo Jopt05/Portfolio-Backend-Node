@@ -30,11 +30,17 @@ export class NodeMailer {
 
     createTransport(options: ICreateTransport){
         const transporter = nodemailer.createTransport({
+            secure: false,
+            host: "smtp-mail.outlook.com", 
+            port: 587,
             service: options.service,
             auth: {
                 user: options.user,
                 pass: options.pass
             },
+            tls: {
+                ciphers:'SSLv3'
+            }
         });
 
         return transporter;
