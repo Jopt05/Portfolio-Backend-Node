@@ -57,3 +57,27 @@ export async function blogsPost( req: Request, res: Response ) {
     })
 
 };
+
+export async function blogPut( req: Request, res: Response ) {
+
+    const { id } = req.params;
+
+    const {
+        blog_name,
+        blog_text,
+    } = req.body;
+
+    const blog: IBlog | null = await Blog.findByIdAndUpdate(id, {
+        blog_name,
+        blog_text
+    });
+
+    if ( !blog ) return res.json(400).json({
+        msg: "No existe el blog"
+    })
+
+    res.status(201).json({
+        msg: "Blog actualizado correctamente"
+    })
+
+};

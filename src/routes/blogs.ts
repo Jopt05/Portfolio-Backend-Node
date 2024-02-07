@@ -32,4 +32,16 @@ router.post(
     blogsPost
 )
 
+router.put(
+    "/:id", [
+        validarJWT,
+        check("id", "El campo id es obligatorio").not().isEmpty(),
+        check("id", "El campo id debe ser mongoid").isMongoId(),
+        check("blog_name", "El campo blog_name es obligatorio").not().isEmpty(),
+        check("blog_text", "El campo blog_text es obligatorio").not().isEmpty(),
+        validarCampos
+    ],
+    blogsPost
+)
+
 export default router;
