@@ -27,3 +27,9 @@ export interface IUsuario extends Document {
     password: string;
     string: correo
 }
+
+export interface IBlog extends Document {
+    blog_name: string;
+    createdAt: Date;
+    blog_text: string;
+}

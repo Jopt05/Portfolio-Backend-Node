@@ -6,6 +6,7 @@ import serviciosRoute from '../routes/servicios';
 import tecnologiasRoute from '../routes/tecnologias';
 import usuariosRoute from '../routes/usuarios';
 import mailerRoute from '../routes/mailer';
+import blogsRoute from '../routes/blogs';
 
 import { dbConnection } from '../database/config';
 
@@ -18,10 +19,12 @@ class Server {
     private serviciosPath: string;
     private emailPath: string;
     private usuariosPath: string;
+    private blogsPath: string;
 
     constructor(){
         this.app = express();
         this.port = process.env.PORT || "8000";
+        this.blogsPath = '/api/blogs';
         this.proyectosPath = '/api/proyectos';
         this.tecnologiasPath= '/api/tecnologias';
         this.serviciosPath= '/api/servicios';
@@ -48,6 +51,7 @@ class Server {
        this.app.use( this.serviciosPath, serviciosRoute);
        this.app.use( this.emailPath, mailerRoute);
        this.app.use( this.usuariosPath, usuariosRoute);
+       this.app.use( this.blogsPath, blogsRoute);
     }
 
     listem(){
