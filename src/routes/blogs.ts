@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validar-campos';
 import { validarJWT } from '../middlewares/validar-JWT';
-import { blogGet, blogsGet, blogsPost } from '../controllers/blog'
+import { blogGet, blogPut, blogsGet, blogsPost } from '../controllers/blog'
 
 const router = Router();
 
@@ -41,7 +41,7 @@ router.put(
         check("blog_text", "El campo blog_text es obligatorio").not().isEmpty(),
         validarCampos
     ],
-    blogsPost
+    blogPut
 )
 
 export default router;
