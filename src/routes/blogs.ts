@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validar-campos';
 import { validarJWT } from '../middlewares/validar-JWT';
-import { blogsGet, blogsPost } from '../controllers/blog'
+import { blogGet, blogsGet, blogsPost } from '../controllers/blog'
 
 const router = Router();
 
@@ -11,6 +11,15 @@ router.get(
         
     ],
     blogsGet
+)
+
+router.get(
+    "/:id", [
+        check("id", "El campo id es obligatorio").not().isEmpty(),
+        check("id", "El campo id debe ser mongoid").isMongoId(),
+        validarCampos
+    ],
+    blogGet
 )
 
 router.post(

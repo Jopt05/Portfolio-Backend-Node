@@ -14,6 +14,29 @@ export async function blogsGet( req: Request, res: Response ) {
 
 };
 
+export async function blogGet( req: Request, res: Response ) {
+
+    const { id } = req.params;
+
+    console.log({id});
+
+    const blog = await Blog.findOne(
+        { _id: id }
+    );
+
+    if( !blog ) {
+        return res.status(400).json({
+            msg: "Blog no existe"
+        })
+    };
+
+    return res.status(200).json({
+        msg: "Blog obtenido correctamente",
+        blog
+    })
+
+}
+
 export async function blogsPost( req: Request, res: Response ) {
 
     const {
