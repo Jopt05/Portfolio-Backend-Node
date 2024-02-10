@@ -74,23 +74,7 @@ export async function proyectosPut( req: Request, res: Response ) {
         id
     } = req.params;
 
-    const {
-        project_name,
-        project_description,
-        project_tecnologies,
-        project_topic,
-        project_state,
-        project_url
-    } = req.body;
-
-    const proyecto: IProyecto | null = await Proyecto.findByIdAndUpdate(id, {
-        project_name,
-        project_description,
-        project_tecnologies,
-        project_topic,
-        project_state,
-        project_url
-    });
+    const proyecto: IProyecto | null = await Proyecto.findByIdAndUpdate(id, req.body);
 
     res.status(200).json({
         msg: "Proyecto actualizado correctamente",
